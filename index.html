@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>面接ガイド｜大紀金属株式会社</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2744;
+    --navy-light: #2a3d5e;
+    --accent: #e8943a;
+    --accent-light: #f5c882;
+    --bg: #f6f3ee;
+    --card: #ffffff;
+    --text: #2c2c2c;
+    --text-light: #6b7280;
+    --border: #e5e0d8;
+    --success: #3a9e6e;
+    --red: #d94f4f;
+    --tag-bg: #eef2f7;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 60px;
+  }
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    color: #fff;
+    padding: 28px 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 20px;
+    background: var(--bg);
+    border-radius: 20px 20px 0 0;
+  }
+  .header-company { font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 13px; letter-spacing: 2px; opacity: .7; margin-bottom: 4px; }
+  .header-title { font-size: 22px; font-weight: 900; line-height: 1.3; }
+  .header-sub { font-size: 12px; margin-top: 8px; opacity: .65; line-height: 1.5; }
+  .container { padding: 8px 16px; max-width: 480px; margin: 0 auto; }
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+  .summary-card { background: var(--card); border-radius: 12px; padding: 14px; border: 1px solid var(--border); }
+  .summary-card.full { grid-column: 1 / -1; }
+  .summary-label { font-size: 10px; font-weight: 700; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .summary-value { font-size: 14px; font-weight: 600; }
+  .summary-value small { font-size: 11px; font-weight: 400; color: var(--text-light); display: block; margin-top: 2px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+  .tag { background: var(--tag-bg); color: var(--navy); font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 20px; }
+  .flow-section { margin-bottom: 24px; }
+  .section-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .section-title::before { content: ''; width: 4px; height: 18px; background: var(--accent); border-radius: 2px; flex-shrink: 0; }
+  .flow-timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+  .flow-step { display: flex; align-items: stretch; gap: 12px; position: relative; }
+  .flow-dot-col { display: flex; flex-direction: column; align-items: center; width: 28px; flex-shrink: 0; }
+  .flow-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--navy); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; z-index: 1; }
+  .flow-line { width: 2px; flex: 1; background: var(--border); }
+  .flow-step:last-child .flow-line { display: none; }
+  .flow-content { background: var(--card); border-radius: 12px; padding: 14px; border: 1px solid var(--border); flex: 1; margin-bottom: 10px; }
+  .flow-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .flow-time { font-size: 11px; color: var(--text-light); }
+  .accordion { margin-bottom: 12px; }
+  .accordion-trigger { width: 100%; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: box-shadow .2s; }
+  .accordion-trigger:active { box-shadow: 0 0 0 3px rgba(232,148,58,.25); }
+  .accordion-trigger-left { display: flex; align-items: center; gap: 10px; }
+  .accordion-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .accordion-icon.ice { background: #e3f0ff; }
+  .accordion-icon.info { background: #e8f5ee; }
+  .accordion-icon.qa { background: #fff4e3; }
+  .accordion-icon.applicant { background: #f0e8ff; }
+  .accordion-icon.confirm { background: #ffe8e8; }
+  .accordion-trigger-text { font-size: 14px; font-weight: 700; color: var(--text); text-align: left; }
+  .accordion-trigger-sub { font-size: 11px; color: var(--text-light); font-weight: 400; }
+  .accordion-chevron { font-size: 18px; color: var(--text-light); transition: transform .25s; flex-shrink: 0; }
+  .accordion.open .accordion-chevron { transform: rotate(180deg); }
+  .accordion-body { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+  .accordion.open .accordion-body { max-height: 3000px; }
+  .accordion-inner { padding: 14px 16px 6px; }
+  .script-bubble { background: var(--navy); color: #fff; border-radius: 16px 16px 16px 4px; padding: 14px 16px; font-size: 13.5px; line-height: 1.75; margin-bottom: 10px; position: relative; }
+  .script-label { font-size: 10px; font-weight: 700; color: var(--accent-light); letter-spacing: 1px; margin-bottom: 4px; }
+  .hint { background: #fffbf2; border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 10px 14px; font-size: 12px; color: var(--text-light); margin-bottom: 12px; line-height: 1.6; }
+  .hint strong { color: var(--text); }
+  .q-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 10px; }
+  .q-card-cat { font-size: 10px; font-weight: 700; color: var(--accent); letter-spacing: 1px; margin-bottom: 4px; }
+  .q-card-text { font-size: 13.5px; font-weight: 500; margin-bottom: 6px; line-height: 1.7; }
+  .q-card-watch { font-size: 11.5px; color: var(--success); line-height: 1.6; }
+  .q-card-watch::before { content: '\1F440 '; }
+  .ng-section { background: #fff5f5; border: 1px solid #f5d0d0; border-radius: 14px; padding: 16px; margin-top: 24px; margin-bottom: 24px; }
+  .ng-title { font-size: 14px; font-weight: 700; color: var(--red); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .ng-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .ng-list li { font-size: 13px; padding-left: 20px; position: relative; line-height: 1.6; }
+  .ng-list li::before { content: '\2715'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+  .ng-note { margin-top: 12px; font-size: 12px; color: var(--text-light); line-height: 1.6; border-top: 1px solid #f0d0d0; padding-top: 10px; }
+  .cat-divider { font-size: 12px; font-weight: 700; color: var(--navy); margin: 14px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--accent); display: inline-block; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-company">DAIKI KINZOKU</div>
+  <div class="header-title">パート面接ガイド</div>
+  <div class="header-sub">建築金物部品の組み立て・梱包｜所要 20〜30分</div>
+</div>
+<div class="container">
+  <div style="margin-top:8px"></div>
+  <div class="summary-grid">
+    <div class="summary-card"><div class="summary-label">時給</div><div class="summary-value">1,180円〜<small>賞与 年2回（8月・12月）</small></div></div>
+    <div class="summary-card"><div class="summary-label">勤務時間</div><div class="summary-value">9:00–17:00<small>残業なし</small></div></div>
+    <div class="summary-card"><div class="summary-label">休日</div><div class="summary-value">土日祝休み<small>夏季・年末年始あり</small></div></div>
+    <div class="summary-card"><div class="summary-label">勤務地</div><div class="summary-value">東大阪市<small>俊徳道駅 徒歩7分</small></div></div>
+    <div class="summary-card full"><div class="summary-label">社会保険</div><div class="summary-value">雇用・労災・健康・厚生年金 完備<small>試用期間3ヶ月（同条件）</small></div></div>
+  </div>
+  <div class="tags">
+    <span class="tag">少人数アットホーム</span><span class="tag">即日勤務OK</span><span class="tag">扶養内可</span><span class="tag">座り作業中心</span><span class="tag">未経験OK</span>
+  </div>
+  <div class="flow-section">
+    <div class="section-title">面接の流れ</div>
+    <div class="flow-timeline">
+      <div class="flow-step"><div class="flow-dot-col"><div class="flow-dot">1</div><div class="flow-line"></div></div><div class="flow-content"><div class="flow-name">アイスブレイク</div><div class="flow-time">2〜3分</div></div></div>
+      <div class="flow-step"><div class="flow-dot-col"><div class="flow-dot">2</div><div class="flow-line"></div></div><div class="flow-content"><div class="flow-name">会社・仕事の説明</div><div class="flow-time">5分</div></div></div>
+      <div class="flow-step"><div class="flow-dot-col"><div class="flow-dot">3</div><div class="flow-line"></div></div><div class="flow-content"><div class="flow-name">質問タイム</div><div class="flow-time">10〜15分</div></div></div>
+      <div class="flow-step"><div class="flow-dot-col"><div class="flow-dot">4</div><div class="flow-line"></div></div><div class="flow-content"><div class="flow-name">応募者からの質問</div><div class="flow-time">3〜5分</div></div></div>
+      <div class="flow-step"><div class="flow-dot-col"><div class="flow-dot">5</div></div><div class="flow-content"><div class="flow-name">条件確認・今後の流れ</div><div class="flow-time">3分</div></div></div>
+    </div>
+  </div>
+  <div class="accordion" onclick="this.classList.toggle('open')"><div class="accordion-trigger"><div class="accordion-trigger-left"><div class="accordion-icon ice">🧊</div><div><div class="accordion-trigger-text">① アイスブレイク</div><div class="accordion-trigger-sub">2〜3分</div></div></div><div class="accordion-chevron">▼</div></div><div class="accordion-body"><div class="accordion-inner"><div class="hint">💡 緊張をほぐし、話しやすい雰囲気を作る</div><div class="script-bubble"><div class="script-label">トーク</div>「本日はお越しいただきありがとうございます。場所はすぐ分かりましたか？」</div><div class="script-bubble"><div class="script-label">トーク</div>「私は○○と申します。堅い面接ではなく、お互いのことを知る場にしたいと思いますので、リラックスしてくださいね。」</div></div></div></div>
+  <div class="accordion" onclick="this.classList.toggle('open')"><div class="accordion-trigger"><div class="accordion-trigger-left"><div class="accordion-icon info">🏭</div><div><div class="accordion-trigger-text">② 会社・仕事の説明</div><div class="accordion-trigger-sub">5分</div></div></div><div class="accordion-chevron">▼</div></div><div class="accordion-body"><div class="accordion-inner"><div class="hint">💡 仕事のイメージを具体的に持ってもらい、ミスマッチを防ぐ</div><div class="script-bubble"><div class="script-label">トーク</div>「まず、うちの会社とお仕事の内容を簡単にご説明しますね。」</div><div class="script-bubble"><div class="script-label">トーク</div>「大紀金属は建築で使う金物部品を扱っている会社です。少人数でやっているので、アットホームな雰囲気ですよ。」</div><div class="script-bubble"><div class="script-label">トーク</div>「お願いしたいのは、金物部品の組み立てと梱包の作業です。ネジなどの小さな部品を扱います。座ってできる作業が中心です。最初は丁寧にお教えしますので、未経験でも全然大丈夫です。」</div><div class="script-bubble"><div class="script-label">トーク</div>「勤務は月〜金の9時〜17時で、残業は基本ありません。土日祝はお休みです。」</div></div></div></div>
+  <div class="accordion" onclick="this.classList.toggle('open')"><div class="accordion-trigger"><div class="accordion-trigger-left"><div class="accordion-icon qa">💬</div><div><div class="accordion-trigger-text">③ 質問タイム</div><div class="accordion-trigger-sub">10〜15分</div></div></div><div class="accordion-chevron">▼</div></div><div class="accordion-body"><div class="accordion-inner"><div class="hint">💡 質問 → 回答 → 深掘り の流れで自然に進める</div><div class="cat-divider">勤務条件</div><div class="q-card"><div class="q-card-cat">希望シフト</div><div class="q-card-text">「週に何日くらい入れそうですか？ フルタイムの9時〜17時で大丈夫ですか？」</div><div class="q-card-watch">扶養内希望の方は勤務日数を調整</div></div><div class="q-card"><div class="q-card-cat">開始時期</div><div class="q-card-text">「いつ頃からお仕事を始められそうですか？」</div><div class="q-card-watch">即日OKはプラス評価</div></div><div class="q-card"><div class="q-card-cat">通勤手段</div><div class="q-card-text">「俊徳道駅から徒歩7分ほどですが、通勤は問題なさそうですか？」</div><div class="q-card-watch">自転車・バイクの可否も確認</div></div><div class="cat-divider">適性・能力</div><div class="q-card"><div class="q-card-cat">集中力</div><div class="q-card-text">「部品の組み立てなど、同じ作業をコツコツ繰り返しますが、そういった作業は得意なほうですか？」</div><div class="q-card-watch">家事・手芸など日常の例えを引き出す</div></div><div class="q-card"><div class="q-card-cat">正確さ</div><div class="q-card-text">「小さなネジや金具を扱うので、数を間違えないよう注意が必要です。細かい作業は好きなほうですか？」</div><div class="q-card-watch">具体的エピソードがあれば◎</div></div><div class="q-card"><div class="q-card-cat">視力</div><div class="q-card-text">「小さな部品の傷や不良を見分ける作業もありますが、細かいものを見るのは問題ないですか？」</div><div class="q-card-watch">メガネ・コンタクトでOK</div></div><div class="cat-divider">経験</div><div class="q-card"><div class="q-card-cat">関連経験</div><div class="q-card-text">「これまでに工場や倉庫、組み立て・梱包のお仕事の経験はありますか？」</div><div class="q-card-watch">未経験でもやる気重視ならOK</div></div><div class="q-card"><div class="q-card-cat">判断力</div><div class="q-card-text">「もし作業中に部品の不良を見つけたら、どうされますか？」</div><div class="q-card-watch">自己判断せず報告できるかを見る</div></div><div class="cat-divider">人柄・定着性</div><div class="q-card"><div class="q-card-cat">志望動機</div><div class="q-card-text">「今回うちの求人に応募しようと思ったきっかけを教えてください。」</div><div class="q-card-watch">動機の具体性を確認</div></div><div class="q-card"><div class="q-card-cat">勤続意欲</div><div class="q-card-text">「長く働きたいですか？ どのくらいの期間を考えていますか？」</div><div class="q-card-watch">短期離職リスクの見極め</div></div><div class="q-card"><div class="q-card-cat">協調性</div><div class="q-card-text">「少人数の職場なので気軽に声をかけてほしいんですが、周りに質問するのは得意ですか？」</div><div class="q-card-watch">アットホームな職場に合うか</div></div><div class="q-card"><div class="q-card-cat">退職理由</div><div class="q-card-text">「差し支えなければ、前のお仕事を辞められた理由を教えていただけますか？」</div><div class="q-card-watch">ネガティブでも前向きに聞く</div></div></div></div></div>
+  <div class="accordion" onclick="this.classList.toggle('open')"><div class="accordion-trigger"><div class="accordion-trigger-left"><div class="accordion-icon applicant">🙋</div><div><div class="accordion-trigger-text">④ 応募者からの質問</div><div class="accordion-trigger-sub">3〜5分</div></div></div><div class="accordion-chevron">▼</div></div><div class="accordion-body"><div class="accordion-inner"><div class="script-bubble"><div class="script-label">トーク</div>「ここまでで何かご質問はありますか？ 仕事内容でも職場の雰囲気でも、なんでも聞いてくださいね。」</div><div class="hint">💡 よく聞かれること：服装（作業着？）、休憩時間、繁忙期、賞与実績、有給休暇</div></div></div></div>
+  <div class="accordion" onclick="this.classList.toggle('open')"><div class="accordion-trigger"><div class="accordion-trigger-left"><div class="accordion-icon confirm">✅</div><div><div class="accordion-trigger-text">⑤ 条件確認・今後の流れ</div><div class="accordion-trigger-sub">3分</div></div></div><div class="accordion-chevron">▼</div></div><div class="accordion-body"><div class="accordion-inner"><div class="script-bubble"><div class="script-label">トーク</div>「改めて確認ですが、時給は1,180円以上で、賞与が年2回あります。社会保険も完備です。この条件で問題ないですか？」</div><div class="script-bubble"><div class="script-label">トーク</div>「試用期間が3ヶ月ありますが、条件は変わりませんのでご安心ください。」</div><div class="script-bubble"><div class="script-label">トーク</div>「選考結果は○日以内にお電話でお伝えしますね。本日はお時間いただきありがとうございました。」</div></div></div></div>
+  <div class="ng-section">
+    <div class="ng-title">⚠ 聞いてはいけないNG質問</div>
+    <ul class="ng-list">
+      <li>本籍地・出生地</li><li>家族の職業・収入・家庭環境</li><li>住宅状況（持ち家・借家）</li><li>宗教・支持政党</li><li>結婚・出産の予定</li><li>思想・人生観</li>
+    </ul>
+    <div class="ng-note">→「この仕事をきちんとできるか・続けられるか」に関係する質問だけに絞りましょう。</div>
+  </div>
+</div>
+</body>
+</html>
